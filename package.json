@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "env:dev:start": "docker compose --profile dev up -d",
+    "env:dev:stop": "docker compose --profile dev down -d",
+    "env:dev:clear": "docker-compose --profile dev down -v --rmi all"
   },
   "author": "",
   "license": "ISC",
