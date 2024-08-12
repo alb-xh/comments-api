@@ -2,6 +2,7 @@
   "name": "mongo-graphql-comment-api",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "env:dev:start": "docker compose --profile dev up -d",
     "env:dev:stop": "docker compose --profile dev down -d",
