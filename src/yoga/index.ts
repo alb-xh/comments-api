@@ -7,12 +7,11 @@ const typeDefinitions = /* GraphQL */ `
     hello: String!
   }
 `
-
 const resolvers = {
   Query: {
     hello: () => 'Hello World!'
   }
-}
+};
 
 export const schema = createSchema({
   resolvers: [resolvers],

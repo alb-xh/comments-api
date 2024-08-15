@@ -1,4 +1,4 @@
-import 'dotenv/config'
+import 'dotenv/config';
 
 import express from "express";
 import logger from 'loglevel';
@@ -21,7 +21,7 @@ import { yoga } from './yoga/index.js'
 
     app.listen(config.getPort(), () => {
       logger.info(`Running a GraphQL API server at http://127.0.0.1:${config.getPort()}/graphql`);
-     });
+    });
   } catch (err) {
     logger.error(err);
     logger.info('Script stopped unexpectedly');
