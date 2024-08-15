@@ -1,11 +1,31 @@
-import * as express from "express";
+import 'dotenv/config'
 
-const app = express.default();
+import express from "express";
+import logger from 'loglevel';
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
+import * as db from './db/index.js';
+import { config } from './config.js';
+
+const app = express();
 
 app.get("/", (req, res) => {
   res.send('Hello World!')
 });
+
+(async () => {
+  try {
+    logger.setLevel(config.isProduction() ? 'INFO' : 'DEBUG');
+    logger.debug('Started script');
+
+    logger.debug(`DB connecting: ${config.getDbUrl()}`);
+
+    await db.connect(config.getDbUrl());
+
+    app.listen(config.getPort(), () => { logger.info(`Server running on port ${config.getPort()}`); });
+  } catch (err) {
+    logger.error(err);
+    logger.info('Script stopped unexpectedly');
+
+    process.exit(1);
+  }
+})();

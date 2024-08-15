@@ -9,7 +9,7 @@
 1. Make sure you use right node version (`nvm use`)
 2. Make sure you setup local `.env` file (`cp .env.dev .env`)
 3. Start docker containers (`npm run env:dev:start`)
-4. Start the server (`npm run server:start`)
+4. Start the server (`npm run app:dev:start`)
 
 #### Urls
 
