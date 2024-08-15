@@ -3,8 +3,10 @@ import 'dotenv/config'
 import express from "express";
 import logger from 'loglevel';
 
-import * as db from './db/index.js';
+import { connect } from './db/index.js';
+import { Comment } from './db/comment.model.js';
 import { config } from './config.js';
+
 
 const app = express();
 
@@ -19,9 +21,11 @@ app.get("/", (req, res) => {
 
     logger.debug(`DB connecting: ${config.getDbUrl()}`);
 
-    await db.connect(config.getDbUrl());
+    await connect(config.getDbUrl());
 
     app.listen(config.getPort(), () => { logger.info(`Server running on port ${config.getPort()}`); });
+
+    await Comment.create({ username: 'alb', email: 'alb@gmail.com',  content: 'What', replies: [] });
   } catch (err) {
     logger.error(err);
     logger.info('Script stopped unexpectedly');
