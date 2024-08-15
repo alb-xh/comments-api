@@ -3,14 +3,13 @@ import 'dotenv/config'
 import express from "express";
 import logger from 'loglevel';
 
-import { connect } from './db/index.js';
 import { config } from './config.js';
+import { connect } from './db/index.js';
+import { yoga } from './yoga/index.js'
 
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send('Hello World!')
-});
+app.use(yoga.graphqlEndpoint, yoga);
 
 (async () => {
   try {
@@ -21,7 +20,7 @@ app.get("/", (req, res) => {
 
     await connect(config.getDbUrl());
 
-    app.listen(config.getPort(), () => { logger.info(`Server running on port ${config.getPort()}`); });
+    app.listen(config.getPort(), () => { logger.info(`Running a GraphQL API server at http://127.0.0.1:${config.getPort()}/graphql`); });
   } catch (err) {
     logger.error(err);
     logger.info('Script stopped unexpectedly');
