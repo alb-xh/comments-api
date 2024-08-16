@@ -1,22 +1,10 @@
-import { createYoga } from "graphql-yoga";
+import { createYoga, createSchema } from "graphql-yoga";
 
-import { createSchema } from 'graphql-yoga'
-
-const typeDefinitions = /* GraphQL */ `
-  type Query {
-    hello: String!
-  }
-`
-const resolvers = {
-  Query: {
-    hello: () => 'Hello World!'
-  }
-};
+import * as CommentResolvers from './comment.resolver.js';
 
 export const schema = createSchema({
-  resolvers: [resolvers],
-  typeDefs: [typeDefinitions]
-})
-
+  resolvers: [ CommentResolvers.resolvers ],
+  typeDefs: [ CommentResolvers.typeDef ]
+});
 
 export const yoga = createYoga({ schema });
